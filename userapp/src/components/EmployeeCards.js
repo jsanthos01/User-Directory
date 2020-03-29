@@ -30,7 +30,7 @@ function EmployeeCards(props) {
     // },[])
 
     return (
-        <div className="container" style={CardStyle.containerStyle}>
+        <div className="container-fluid" style={CardStyle.containerStyle}>
             {props.showEmployeeList.map((user) => 
                 (
                     <div className="card m-3 " key={user.id}style={CardStyle.cardWrapper}>
@@ -43,6 +43,7 @@ function EmployeeCards(props) {
                         </div>
                         <div className="card-body bg-light text-dark">
                             <ul className="list-group">
+                                <li className="list-group-item" style={CardStyle.liStyle}>ID: {user.id}</li>
                                 <li className="list-group-item" style={CardStyle.liStyle}>Email: {user.email}</li>
                                 <li className="list-group-item" style={CardStyle.liStyle}>Phone: {user.phone}</li>
                                 <li className="list-group-item" style={CardStyle.liStyle}>Address: {user.address.suite}, {user.address.street}, {user.address.city} </li>
