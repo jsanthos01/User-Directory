@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from 'react'
 import SearchForm from './SearchForm'
 import EmployeeCards from './EmployeeCards'
-
+import employees from '../employees.json'
 function MainPage() {
     const mainStyle = {
         fontFamily: "Karla, sans-serif",
@@ -11,7 +11,7 @@ function MainPage() {
 
     const [ inputSearch, setInputSearch ] = useState("");
     const [ employeeList , setEmployeeList ] = useState([]);
-    const [ showEmployeeList , setShowEmployeeList ] = useState([]);
+    let [ showEmployeeList , setShowEmployeeList ] = useState([]);
 
     function handleInputChange(e){
         console.log("Inside the onChange function")
@@ -32,7 +32,8 @@ function MainPage() {
     async function populateEmployeeList(){
         let employeeListLoaded = await fetch('https://jsonplaceholder.typicode.com/users')
         let json = await employeeListLoaded.json();
-        setEmployeeList(json)
+        setEmployeeList(json);
+        setShowEmployeeList(json);
     }
 
     function sortOption(option){
@@ -40,10 +41,12 @@ function MainPage() {
         switch(option){
             case "firstName" : 
                 sortedList = employeeList.sort(nameOrder);
+                showEmployeeList =[];
                 setShowEmployeeList(sortedList);
                 break;
             case "id" : 
                 sortedList = employeeList.sort(idOrder);
+                showEmployeeList =[];
                 setShowEmployeeList(sortedList);
                 break;
         }   
@@ -65,14 +68,22 @@ function MainPage() {
         return a.id - b.id;
     }
 
-
+    // function filterOption(option){
+    //     switch(option){
+    //         case "": 
+    //         case "": 
+    //         case "": 
+    //         default: 
+    //             alert("Not an Option!")
+    //     }
+    // }
 
     useEffect (function(){
         populateEmployeeList();
     },[])
     useEffect (function(){
         sortOption();
-    },[showEmployeeList])
+    },[])
 
     return (
         <div>
@@ -84,7 +95,7 @@ function MainPage() {
                 </div>
             </div>
             <div className="container-fluid">
-                <div className="album py-5 bg-light">
+                <div className="card-group">
                     <EmployeeCards showEmployeeList={showEmployeeList} />
                 </div>
             </div>
