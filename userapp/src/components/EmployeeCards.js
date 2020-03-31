@@ -1,7 +1,5 @@
 import React from 'react'
-// import SearchForm from './SearchForm'
 import UserImage from './UserImage'
-
 
 function EmployeeCards(props) {
     const CardStyle = {
@@ -14,7 +12,6 @@ function EmployeeCards(props) {
             flexWrap: "wrap"
         },
         imgStyle: {
-            border: "1px solid #ddd",
             padding: "5px",
             margin: "auto",
             display: "block"
@@ -29,8 +26,7 @@ function EmployeeCards(props) {
                             <UserImage img={CardStyle.imgStyle}name={user.name}/>
                         </div>
                         <div className="card-header text-white bg-primary">
-                            <h3>{user.name}</h3>
-                            <h5>Company: {user.company.name}</h5>
+                            <h3 style={{textAlign: "center"}}>{user.name}</h3>
                         </div>
                         <div className="card-body bg-light text-dark">
                             <ul className="list-group">

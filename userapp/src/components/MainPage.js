@@ -1,12 +1,16 @@
 import React , { useState, useEffect } from 'react'
 import SearchForm from './SearchForm'
 import EmployeeCards from './EmployeeCards'
-import employees from '../employees.json'
 function MainPage() {
     const mainStyle = {
         fontFamily: "Karla, sans-serif",
-        backgroundColor: "rgb(245, 79, 79)",
-        textAlign: "center"
+        backgroundColor: "#002E8B",
+        textAlign: "center", 
+        textStyle:{
+            fontWeight: "900",
+            fontSize: "70px",
+            textTransform: "uppercase"
+        }
     }
 
     const [ inputSearch, setInputSearch ] = useState("");
@@ -14,15 +18,13 @@ function MainPage() {
     let [ showEmployeeList , setShowEmployeeList ] = useState([]);
 
     function handleInputChange(e){
-        console.log("Inside the onChange function")
         const inputValue = e.target.value;
         setInputSearch(inputValue);
         
-        if(inputValue.length > 0){
+        if(inputValue.length > 1){
             let filteredList = employeeList.filter((employeeName) => {
-                return employeeName.name.toLowerCase().includes(inputSearch.toLowerCase());
+                return employeeName.name.toLowerCase().indexOf(inputSearch.toLowerCase()) === 0;
             });
-            console.log(filteredList)
             setShowEmployeeList(filteredList);
         }else {
             setShowEmployeeList([]);
@@ -37,19 +39,19 @@ function MainPage() {
     }
 
     function sortOption(option){
-        let sortedList;
-        switch(option){
-            case "firstName" : 
-                sortedList = employeeList.sort(nameOrder);
-                showEmployeeList =[];
-                setShowEmployeeList(sortedList);
-                break;
-            case "id" : 
-                sortedList = employeeList.sort(idOrder);
-                showEmployeeList =[];
-                setShowEmployeeList(sortedList);
-                break;
-        }   
+        console.log(`${option} has been clicked!!`)
+        setShowEmployeeList([]);
+        if(option === "firstName"){
+            // console.log("Inside firstname option before", sortedList);
+            employeeList.sort(nameOrder);
+            setShowEmployeeList([...employeeList]);
+        }else if(option === "id"){
+            employeeList.sort(idOrder);
+            // console.log("Inside id option", sortedList);
+            setShowEmployeeList([...employeeList]);
+        }else {
+            setShowEmployeeList([]);
+        } 
     }
     
     //Sort by Name(Alphabetical)
@@ -63,41 +65,27 @@ function MainPage() {
         }
         return 0
     }
+
     //Sort By ID
     function idOrder(a,b){
         return a.id - b.id;
     }
 
-    // function filterOption(option){
-    //     switch(option){
-    //         case "": 
-    //         case "": 
-    //         case "": 
-    //         default: 
-    //             alert("Not an Option!")
-    //     }
-    // }
-
     useEffect (function(){
         populateEmployeeList();
     },[])
-    useEffect (function(){
-        sortOption();
-    },[])
-
+    
     return (
         <div>
             <div className="jumbotron jumbotron-fluid" style={mainStyle}>
                 <div className="container">
-                    <h1 className="display-4">Company Clouds </h1>
-                    <p className="lead">Bring your Employee Directory to Life!</p>
+                    <h1 className="display-4" style={mainStyle.textStyle}>Company Clouds </h1>
+                    <h3 style={{marginBottom: "20px"}}>Bring your Employee Directory to Life!</h3>
                     <SearchForm handleInputChange={handleInputChange} inputSearch={inputSearch} setInputSearch={setInputSearch} sortOption={sortOption}/>
                 </div>
             </div>
             <div className="container-fluid">
-                <div className="card-group">
-                    <EmployeeCards showEmployeeList={showEmployeeList} />
-                </div>
+                <EmployeeCards showEmployeeList={showEmployeeList}  />
             </div>
         </div>
     )
