@@ -5,6 +5,9 @@ function MainPage() {
     const mainStyle = {
         fontFamily: "Karla, sans-serif",
         backgroundColor: "#002E8B",
+        backgroundImage: 'linear-gradient(45deg,  #6d2ab922  ,#0026ff22 ), linear-gradient( #00000055,  #00000055), url("https://www.targettraining.eu/wp-content/uploads/2018/12/business-english-1030x617.jpg")',
+        backgroundSize: 'cover',
+        backgroundPostition: 'center' ,
         textAlign: "center", 
         textStyle:{
             fontWeight: "900",

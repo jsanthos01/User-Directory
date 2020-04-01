@@ -3,16 +3,14 @@ import React from 'react'
 function SearchForm(props) {
     const searchStyle ={
         container: {display: "flex", flexDirection: "column"},
-        row: {alignItems: "center", justifyContent: "center",flexDirection: "column" }
+        row: {alignItems: "center", justifyContent: "center",flexDirection: "column" },
+        input:{width: "100%", borderRadius: "80px"}
     }
     return (
         <div>
             <form>
                 <div className="input-group mb-3">
-                    <input type="text" className="form-control" value={props.inputSearch} onChange={props.handleInputChange} placeholder="Search your employee"/>
-                    <div className="input-group-append">
-                        <button className="btn btn-danger"  type="button">Search</button>
-                    </div>
+                    <input style={searchStyle.input}type="text" className="form-control" value={props.inputSearch} onChange={props.handleInputChange} placeholder="Search your employee"/>
                 </div>   
             </form>
             <div className="container" style={searchStyle.container}>

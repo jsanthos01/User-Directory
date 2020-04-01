@@ -8,4 +8,4 @@ This is a simple React application that create a employee directory. As a user, 
 ```
 
 ## Live Deployment
-
+[Demo](https://jsanthos01.github.io/User-Directory/)
