@@ -12,4 +12,4 @@ This is an Employee Directory application built with React. The app allows manag
 ```
 
 ## Live Deployment
-[Demo](https://jsanthos01.github.io/User-Directory/)
+[https://jsanthos01.github.io/User-Directory/](https://jsanthos01.github.io/User-Directory/)
